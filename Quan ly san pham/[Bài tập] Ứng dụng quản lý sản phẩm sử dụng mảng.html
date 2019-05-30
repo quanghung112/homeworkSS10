@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<body>
+<input type="text" id="input" placeholder="New Product">
+<button onclick="add()">Add</button>
+<h3>Display All Product</h3>
+<p id="outputProduct"></p>
+<table id="table">
+    <tr>
+        <td>STT</td>
+        <td>Product Name</td>
+        <td>Edit</td>
+        <td>Delete</td>
+    </tr>
+</table>
+<style>
+    table {
+        font-family: "Times New Roman";
+        font-size: x-large;
+        border-collapse: collapse;
+        width: 600px;
+    }
+
+    td {
+        border: 2px solid black;
+        text-align: center;
+        padding: auto;
+        background: aliceblue;
+    }
+</style>
+<script>
+    let app = function () {
+        this.products = ["Nokia", "Samsung", "iphone"];
+        this.addProduct = function (product) {
+            this.products.push(product);
+        };
+        this.delProduct = function (item) {
+            this.products.splice(item, 1);
+            this.display();
+        };
+        this.editProduct = function (index, value) {
+            value = prompt();
+            this.products[index] = value;
+            this.display();
+        };
+
+        this.display = function () {
+            let table = "<tr> <td>STT</td> <td>Product Name</td> <td>Edit</td> <td>Delete</td> </tr>";
+            for (let i = 0; i < this.products.length; i++) {
+                table += "<tr>";
+                table += "<td>" + eval(i + 1) + "</td>";
+                table += "<td>" + this.products[i] + "</td>";
+                table += "<td>" + "<button value='" + i + "' onclick='App.editProduct(this.value)'>Edit</button>" + "</td>";
+                table += "<td>" + "<button value='" + i + "' onclick='App.delProduct(this.value)'>Delete</button>" + "</td>";
+                table += "</tr>";
+            }
+            document.getElementById("table").innerHTML = table;
+        }
+    };
+    let App = new app();
+    App.display();
+
+    function add() {
+        let input = document.getElementById("input").value;
+        App.addProduct(input);
+        document.getElementById("input").value = "";
+        App.display();
+    }
+
+</script>
+</body>
+</html>

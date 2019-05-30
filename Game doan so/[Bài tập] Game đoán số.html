@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input" onchange="input()" placeholder="press enter to input">
+<script>
+    let A=[1,2,3,4,5,15,22,44,78,50,80];
+
+    function find(Arr,num) {
+        let count=true;
+        for(let i=0;i<Arr.length;i++){
+            if (Arr[i]==num){
+                count=false;
+            }
+        }
+        if(count==false){
+            alert("co so "+num+" trong mang");
+        }else{
+            alert("khong co so "+num+" trong mang");
+        }
+    }
+    function input(){
+        let input=document.getElementById("input").value;
+        let Find=find(A,input);
+        Find;
+    }
+
+</script>
+</body>
+</html>

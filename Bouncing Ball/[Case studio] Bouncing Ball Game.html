@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" width="1000px" height="600px" style="border: 3px solid black"></canvas>
+
+<script>
+    let c = document.getElementById("canvas");
+    let dx = 1;
+    let dy = 1;
+    let a;
+    let ctx = c.getContext("2d");
+    let ball = function (x, y, radius, speed) {
+        this.x = x;
+        this.y = y;
+        this.radius = radius;
+        this.status = true;
+        this.speed = speed;
+
+        this.CreatBall = function () {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "Brown";
+            ctx.fill();
+        };
+        this.moveBall = function () {
+            this.x += dx;
+            this.y += dy;
+            if (this.y < this.radius) {
+                dy = -dy;
+            } else if (this.x < this.radius || this.x > 1000 - this.radius) {
+                dx = -dx;
+            }
+        }
+    };
+    let rect = function (x, y, w, h, speed) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+        this.speed = speed;
+        this.status=true;
+        this.creatRect = function () {
+            ctx.beginPath();
+            ctx.rect(this.x, this.y, this.w, this.h);
+            ctx.fillStyle = "red";
+            ctx.fill();
+        };
+        this.move = function () {
+            if (a == 1) {
+                this.x -= this.speed;
+            } else if (a == 2) {
+                this.x += this.speed;
+            }
+            if(Rect.x<=0){
+                a=2;
+            }
+            if(Rect.x+Rect.w>=1000){
+                a=1;
+            }
+        };
+        this.checkStatus=function (Ball) {
+            if (Ball.y > 600 - Ball.radius) {
+                this.status=false;
+            }
+            else if (Ball.x+Ball.radius>this.x &&Ball.x-Ball.radius<this.x+this.w
+                && Ball.y+Ball.radius>this.y){
+                this.status=false;
+                }
+
+            else if(Ball.y >= this.y - Ball.radius &&
+                Ball.x+Ball.radius>=this.x && Ball.x-Ball.radius<=this.x+this.w){
+                dy=-dy;
+            }
+
+        }
+    };
+
+    function moveRect(event) {
+        if (event.keyCode == 37) {
+            a = 1;
+        }
+        if (event.keyCode == 39) {
+            a = 2;
+        }
+    }
+    window.addEventListener("keydown", moveRect);
+    let Ball = new ball(500, 300, 20, 25);
+    let Rect = new rect(300, 600 - 100, 300, 100, 5);
+    Ball.CreatBall();
+    Rect.creatRect();
+    let move = setInterval(function () {
+        ctx.clearRect(0, 0, 1000, 600);
+        Ball.CreatBall();
+        Rect.creatRect();
+        Rect.move();
+        Ball.moveBall(1, 1);
+        Rect.checkStatus(Ball);
+        if (Rect.status==false) {
+            clearInterval(move);
+        }
+    }, 3);
+
+</script>
+</body>
+</html>

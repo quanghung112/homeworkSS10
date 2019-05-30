@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input id="input" onchange="input()" placeholder="press enter to input">
+<p id="outputArr"></p>
+<p id="output"></p>
+<script>
+    let A=[1,2,3,4,4,5,1,2,4,1,5,1,2,8,9,5];
+    document.getElementById("outputArr").innerHTML=A;
+
+    function find(Arr,num) {
+        let count=0;
+        for(let i=0;i<Arr.length;i++){
+            if (Arr[i]==num){
+                count++
+            }
+        }
+        return count;
+    }
+    function input() {
+        let input=document.getElementById("input").value;
+        let Find =find(A,input);
+
+        document.getElementById("output").innerHTML="so "+input+" xuat hien "+ Find+" lan";
+    }
+
+</script>
+</body>
+</html>

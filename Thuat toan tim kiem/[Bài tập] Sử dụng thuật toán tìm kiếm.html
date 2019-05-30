@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    let A=["0977777777","0988888888","0911111111","0922222222","090000000"];
+    let B=[];
+    let viettel_regex = /^((097|098)+([0-9]{7})\b)$/;
+    for (let i=0;i<A.length;i++){
+        if(viettel_regex.test(A[i])){
+           B.push(A[i]);
+        }
+    }
+    alert("sdt viettel la: "+B);
+
+
+</script>
+</body>
+</html>
